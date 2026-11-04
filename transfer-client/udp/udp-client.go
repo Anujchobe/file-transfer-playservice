@@ -153,7 +153,7 @@ func Fetch(address string, filename string) ([]byte, error) {
 				return nil, err
 			}
 		}
-		fmt.Fprintf(os.Stderr, "Missing chunks %v, retrying\n", missing)
+		fmt.Fprintf(os.Stderr, "Missing chunks: %d of %d, retrying\n", len(missing), num_chunks)
 		for _, id := range missing {
 			_, err := fmt.Fprintf(conn, "RETY %v %v", filename, id)
 			if err != nil {

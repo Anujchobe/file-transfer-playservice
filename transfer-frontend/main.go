@@ -11,6 +11,7 @@ import (
 	"syscall"
 	"time"
 
+	"example.com/go-file-transfer/netstats"
 	"example.com/go-file-transfer/transfer-client/tcp"
 	"example.com/go-file-transfer/transfer-client/udp"
 	"example.com/go-file-transfer/transfer-frontend/gateway"
@@ -95,6 +96,7 @@ func main() {
 		os.Exit(0)
 	}()
 
+	go netstats.Log("gateway", 5*time.Second)
 	err = frontend.Router.Run(listen)
 	if err != nil {
 		log.Fatal(err)

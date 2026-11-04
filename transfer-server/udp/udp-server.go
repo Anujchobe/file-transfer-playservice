@@ -13,6 +13,7 @@ import (
 	"syscall"
 	"time"
 
+	"example.com/go-file-transfer/netstats"
 	"example.com/go-file-transfer/transfer-server/health"
 	"example.com/go-file-transfer/transfer-server/loss"
 	"example.com/go-file-transfer/transfer-server/opts"
@@ -149,6 +150,7 @@ func RunServer(args []string) {
 		transport.StopReceiving()
 	}()
 
+	go netstats.Log("backend", 5*time.Second)
 	protocol.Serve(transport, source, workers)
 }
 
